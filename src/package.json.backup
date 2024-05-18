@@ -1,0 +1,36 @@
+{
+  "name": "reciperave",
+  "version": "1.0.0",
+  "description": "RecipieRave web app",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "spin-server": "nodemon --watch 'src/**/*' -e js,json --exec 'node' ./src/server.js",
+    "dev": "nodemon --exec babel-node --presets @babel/preset-env"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thedunncodes/RecipeRave-web-app.git"
+  },
+  "author": "thedunncodes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thedunncodes/RecipeRave-web-app/issues"
+  },
+  "homepage": "https://github.com/thedunncodes/RecipeRave-web-app#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.0",
+    "@babel/core": "^7.8.0",
+    "@babel/node": "^7.8.0",
+    "@babel/preset-env": "^7.8.2",
+    "@babel/register": "^7.8.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-jest": "^28.5.0",
+    "nodemon": "^3.1.0"
+  }
+}
