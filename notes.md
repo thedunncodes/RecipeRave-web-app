@@ -18,3 +18,7 @@ RecipeRave/
 ├── .gitignore
 ├── package.json
 └── README.md
+
+
+--------------------------------TO DOs-----------------------------------
+1. Redesign sign out menu after learning how to parse variables into front-end
