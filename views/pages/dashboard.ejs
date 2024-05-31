@@ -1,0 +1,45 @@
+<!-- <% if (currentUser) { %>
+    <%= `${currentUser.username}'s Dashboard`  %>
+<% } %> -->
+<div class="container">
+    <div class="form-container">
+        <form id="article-form" action="/article/data" method="post" enctype="multipart/form-data">
+            <div class="internal-form-container">
+                <div class="form-header">
+                    <!-- Cover image Field -->
+                    <div class="cover-image-wrapper">
+                        <div class="cover-image-container">
+                            <label for="cover">Upload a cover image for your Blog post (Accepted fromats: .jpg, .jpeg, .png)</label>
+                            <input type="file" accept=".jpg, .jpeg, .png" accept id="image-input" name="image" required aria-required="true">
+                        </div>
+                        <div class="image-preview-wrapper">
+                            <img id="image-preview" class="image-preview" src="" alt="Image Preview">
+                            <button type="button" id="remove-btn" class="remove-btn">X</button>
+                        </div>
+                    </div>
+                
+                    <!-- Title Field -->
+                    <div class="title-wrapper">
+                        <div class="title-container">
+                            <!-- <label for="title">Title</label> -->
+                            <input type="text" id="title" name="title" required aria-required="true" maxlength="50" placeholder="Title">
+                        </div>
+                    </div>
+    
+                </div>
+                
+                <div class="article-container">
+                    <div id="editor-container"></div>
+                    <input type="hidden" name="content" id="hidden-content" required>
+                    <div id="editor-error" style="color: red; display: none;">Content is required.</div>
+                    <!-- <button id="save-article">Save Article</button> -->
+                </div>
+            
+                <!-- Submit Button -->
+                <div class="form-submit">
+                <button id="save-article" type="submit">Post article</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
