@@ -1,0 +1,26 @@
+.pagination-wrapper {
+  display: block;
+  width: 15%;
+  margin: auto;
+  height: 3rem;
+}
+
+.pagination a, .pagination .page-next, .pagination .page-prev {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+  
+  .pagination .page-next, .pagination .page-prev {
+    cursor: pointer;
+  }
+
+  .pagination a.active {
+    background-color: dodgerblue;
+    color: white;
+  }
+
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+  .pagination .page-next:hover:not(.active), .pagination .page-prev:hover:not(.active) {background-color: #ddd;}

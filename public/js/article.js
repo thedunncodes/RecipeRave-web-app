@@ -75,29 +75,30 @@ const removeBtn = document.getElementById('remove-btn');
 const imageInputContainer = document.querySelector('.cover-image-container');
 const imagePreviewWrapper = document.querySelector('.image-preview-wrapper');
 
-imageInput.addEventListener('change', function () {
-  const file = this.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      imagePreview.setAttribute('src', event.target.result);
-      imagePreview.style.display = 'block';
-      // removeBtn.style.display = 'block';
-      imageInputContainer.style.display = 'none';
-      imagePreviewWrapper.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
-removeBtn.addEventListener('click', () => {
-  imagePreview.setAttribute('src', '');
-  imagePreview.style.display = 'none';
-  removeBtn.style.display = 'none';
-  imageInputContainer.style.display = 'block';
-  imagePreviewWrapper.style.display = 'none';
-  imageInput.value = '';
-});
+if (imageInput) {
+  imageInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        imagePreview.setAttribute('src', event.target.result);
+        imagePreview.style.display = 'block';
+        // removeBtn.style.display = 'block';
+        imageInputContainer.style.display = 'none';
+        imagePreviewWrapper.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+  removeBtn.addEventListener('click', () => {
+    imagePreview.setAttribute('src', '');
+    imagePreview.style.display = 'none';
+    removeBtn.style.display = 'none';
+    imageInputContainer.style.display = 'block';
+    imagePreviewWrapper.style.display = 'none';
+    imageInput.value = '';
+  });
+}
 
 function wrapElement(wrapperClass, targetSelector) {
   // Find the target element

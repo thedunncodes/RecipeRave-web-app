@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="account-body">
+        <div class="profile-container">
+            <div class="account-info">
+                <div class="account-image-content">
+                    <form action="/account/profile-update" method="post" enctype="multipart/form-data">
+                        <div class="profile-form-container">
+                            <img src="/images/uploads/profilepics/<%= data.profile_image %>" alt="Profile pic" id="default-profile-img">
+                            <div class="profile-img-update">
+                                <input type="file" accept=".jpg, .jpeg, .png" hidden id="profile-image-input" name="image" required aria-required="true">
+                                <img id="profile-image-preview" src="#" alt="Image Preview">
+                                <div class="profile-image-menu">
+                                    <label for="profile-image-input" id="profile-change-btn">Edit</label>
+                                    <button type="submit" id="img-submit-btn" >Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="account-info-content">
+                    @<%= data.username%> | <%= data.fullname %>
+                </div>
+                <div class="account-info-content">
+                    <a href="/account/saved" class="saved-articles">Saved Articles</a>
+                </div>
+            </div>
+        </div>
+        <div class="account-reset-container">
+            <div class="label-holder">
+                Update your information
+            </div>
+            <form action="#" method="post">
+                <!-- User Name Field -->
+                <div class="account-form-group">
+                    <!-- <label for="username">Username</label> -->
+                    <input type="text" id="username" name="username" required aria-required="true" maxlength="20" placeholder="New username">
+                </div>
+            
+                <!-- Full Name Field -->
+                <div class="account-form-group">
+                    <!-- <label for="fullname">Full name</label> -->
+                    <input type="text" id="fullname" name="fullname" required aria-required="true" maxlength="50" placeholder="New fullname">
+                </div>
+            
+                <!-- Password Field -->
+                <div class="account-form-group">
+                    <!-- <label for="password">Password</label> -->
+                    <input type="password" id="password" name="password" required aria-required="true" minlength="5" placeholder="New password">
+                </div>
+            
+                <!-- Submit Button -->
+                <div class="account-form-group">
+                <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="users-post-body">
+        <div class="users-post-personal">
+            <% if (userArticle) { %>
+                <div class="posts-container">
+                    <h2>My Saves </h2>
+                    <span class="line-break"></span>
+                    <div class="posts-grid-container">
+                       <% for( let index = 0; index < userArticle.length; index++ ) { %>
+                          <div class="posts-box-content-wrapper">
+                             <div class="posts-box-content">
+                                <div class="posts-box-header-content">
+                                   <a href="/recipes/<%= userArticle[index]._id%>">
+                                      <img src="/images/uploads/covers/<%-  userArticle[index].cover_image %>" alt="Post cover image">
+                                      <h1 class="post-header-content">
+                                         <%-  userArticle[index].title %> 
+                                      </h1>
+                                   </a>
+                                </div>
+                                <div class="posts-box-profile-content">
+                                   <a href="">
+                                      <span class="posts-profile-content">
+                                         By: <%-  userArticle[index].fullname %> |
+                                      </span>
+                                      <span class="posts-profile-content-date">
+                                         <%-  userArticle[index].date_created %>
+                                      </span>
+                                   </a>
+                                </div>
+                             </div>
+                          </div>
+                       <% } %>
+                    </div>
+                 </div>
+            <% } %>
+        </div>
+    </div>
+    <div class="pagination-wrapper">
+        <div class="pagination">
+            <div class="page-prev">
+                &laquo;
+            </div>
+            <% for( let index = pagination.roll_start; index <= pagination.roll_end; index++ ) { %>
+                <div class="page-index">
+                    <a href="/account/?page=<%= index %>&start=<%= index %>&end=<%= ((Number(index) + 2) >= pagination.maxPage)? pagination.maxPage : (Number(index) + 2) %>&maxPage=<%= pagination.maxPage %>" id="page-index"><%= index %></a>
+                </div>
+            <% } %>
+            <div class="page-next">
+                <!-- <a href="/account/?page=1&start=1&end=3&maxPage=<%= pagination.maxPage %>" id="page-next">&raquo;</a> -->
+                &raquo;
+            </div>
+        </div>
+    </div>
+</div>

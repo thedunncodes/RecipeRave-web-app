@@ -1,7 +1,7 @@
 <header>
     <section class="Logo-section">
-        <a href="#">
-            <img src="/images/rec_1rbg.png" alt="RecipeRave logo">
+        <a href="/">
+            <img src="/images/static_images/rec_1rbg.png" alt="RecipeRave logo">
             <span> RecipeRave </span>
         </a>
     </section>
@@ -32,12 +32,20 @@
                 </div>
             </div>
             <div class="user-container">
-                <div class="user-auth">
-                    <a href="">Sign in</a>
-                </div>
-                <div class="user-image">
-                    <img src="https://i.natgeofe.com/n/9135ca87-0115-4a22-8caf-d1bdef97a814/75552.jpg" alt="User profile picture">
-                </div>
+                <% if (currentUser) { %>
+                    <div class="user-auth">
+                        <a href="/user/logout">Log out</a>
+                    </div>
+                <% } else { %>
+                    <div class="user-auth">
+                        <a href="/sign-in">Sign in</a>
+                    </div>
+                <% } %>
+                <% if (currentUser) { %>
+                    <div class="user-image">
+                        <a href="/account"><img src="/images/uploads/profilepics/<%= data.profile_image %>" alt="User profile picture"></a>
+                    </div>
+                <% } %>
             </div>
         </div>
         <div class="menu-toggle">

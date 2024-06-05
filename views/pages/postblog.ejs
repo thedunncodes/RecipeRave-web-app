@@ -1,0 +1,23 @@
+<% if (article) { %>
+    <div class="container">
+        <div class="post-container">
+            <div class="post-header-container">
+                <img src="/images/uploads/covers/<%-  article.cover_image %>" class="post-header-img" alt="cover_image">
+                <h1><%- article.title %></h1>
+                <div class="post-header-info">
+                    <img src="/images/uploads/profilepics/default.png" alt="">
+                    <span>
+                        By: <a href=""><%-  article.fullname %></a> | <%-  article.date_created %>
+                    </span>
+                </div>
+            </div>
+            <div class="post-content-container">
+                <!-- ADD PROFILE IMAGE HERE DO THIS BEFORE CONTINUE
+                FIX THE PROFILE UPLOAD
+                -->
+
+                <%- article.content %>
+            </div>
+        </div>
+    </div>
+<% } %>

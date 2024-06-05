@@ -1,1 +1,131 @@
-<p>hallooo waarllld!!</p>
+<div class="body-container">
+   <div class="content-container">
+      <div class="intro-container">
+
+      </div>
+      <div class="category-container">
+         <div class="grid-container">
+            <div class="category-box">
+               <div class="category-box-img-wrapper">
+                  <img src="images/static_images/rec_default_break_fast.jpg" alt="Break fast picture">
+               </div>
+               <div class="category-box-content">
+                  <span class="category-box-item">
+                     <a href="">
+                        Break Fast
+                     </a>
+                     <a href="">
+                        70 recipes
+                     </a>
+                  </span>
+               </div>
+            </div>
+            <div class="category-box">
+               <div class="category-box-img-wrapper">
+                  <img src="images/static_images/rec_default_launch.jpg" alt="Break fast picture">
+               </div>
+               <div class="category-box-content">
+                  <span class="category-box-item">
+                     <a href="">
+                        Launch
+                     </a>
+                     <a href="">
+                        70 recipes
+                     </a>
+                  </span>
+               </div>
+            </div>
+            <div class="category-box">
+               <div class="category-box-img-wrapper">
+                  <img src="images/static_images/rec_default_dinner.jpg" alt="Break fast picture">
+               </div>
+               <div class="category-box-content">
+                  <span class="category-box-item">
+                     <a href="">
+                        Dinner
+                     </a>
+                     <a href="">
+                        70 recipes
+                     </a>
+                  </span>
+               </div>
+            </div>
+            <div class="category-box">
+               <div class="category-box-img-wrapper">
+                  <img src="images/static_images/rec_default_dessert.jpg" alt="Break fast picture">
+               </div>
+               <div class="category-box-content">
+                  <span class="category-box-item">
+                     <a href="">
+                        Dessert
+                     </a>
+                     <a href="">
+                        70 recipes
+                     </a>
+                  </span>
+               </div>
+            </div>
+            <div class="category-box">
+               <div class="category-box-img-wrapper">
+                  <img src="images/static_images/rec_default_baking.jpg" alt="Break fast picture">
+               </div>
+               <div class="category-box-content">
+                  <span class="category-box-item">
+                     <a href="">
+                        Baking
+                     </a>
+                     <a href="">
+                        70 recipes
+                     </a>
+                  </span>
+               </div>
+            </div>
+            <div class="category-box">
+               <div class="category-box-img-wrapper">
+                  <img src="images/static_images/rec_default_drinks.jpg" alt="Break fast picture">
+               </div>
+               <div class="category-box-content">
+                  <span class="category-box-item">
+                     <a href="">
+                        Drinks
+                     </a>
+                     <a href="">
+                        70 recipes
+                     </a>
+                  </span>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="posts-container">
+         <h2>Top posts</h2>
+         <span class="line-break"></span>
+         <div class="posts-grid-container">
+            <% for( let index = 0; index < article.length; index++ ) { %>
+               <div class="posts-box-content-wrapper">
+                  <div class="posts-box-content">
+                     <div class="posts-box-header-content">
+                        <a href="/recipes/<%= article[index]._id%>">
+                           <img src="/images/uploads/covers/<%-  article[index].cover_image %>" alt="Post cover image">
+                           <h1 class="post-header-content">
+                              <%-  article[index].title %> 
+                           </h1>
+                        </a>
+                     </div>
+                     <div class="posts-box-profile-content">
+                        <a href="">
+                           <span class="posts-profile-content">
+                              By: <%-  article[index].fullname %> |
+                           </span>
+                           <span class="posts-profile-content-date">
+                              <%-  article[index].date_created %>
+                           </span>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            <% } %>
+         </div>
+      </div>
+   </div>
+</div>
