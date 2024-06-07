@@ -5,6 +5,23 @@
     <div class="form-container">
         <form id="article-form" action="/article/data" method="post" enctype="multipart/form-data">
             <div class="internal-form-container">
+                <div class="category-wrapper">
+                    <div class="category-container">
+                        <div class="category-container-header">
+                            Choose a category to post under
+                        </div>
+                        <div class="category-container-content">
+                            <input type="hidden" name="category">
+                            <div class="category-content-menu">Break Fast</div>
+                            <div class="category-content-menu">Launch</div>
+                            <div class="category-content-menu">Dinner</div>
+                            <div class="category-content-menu">Dessert</div>
+                            <div class="category-content-menu">Baking</div>
+                            <div class="category-content-menu">Drinks</div>
+                        </div>
+                        <div class="category-error">Category is required</div>
+                    </div>
+                </div>
                 <div class="form-header">
                     <!-- Cover image Field -->
                     <div class="cover-image-wrapper">

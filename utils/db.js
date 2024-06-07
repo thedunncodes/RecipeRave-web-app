@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 
 class DBClient {
   constructor() {
@@ -24,6 +24,22 @@ class DBClient {
 
   async nbArticles() {
     return this.client.db().collection('articles').countDocuments();
+  }
+
+  async nbCategory(category) {
+    return this.client.db().collection('articles').find({ category }).count();
+  }
+
+  async retreiveSaved(idList) {
+    const articles = [];
+
+    for (const postid of idList) {
+      const article = await this.client.db().collection('articles').findOne({ _id: new ObjectId(postid) });
+      if (article) {
+        articles.push(article);
+      }
+    }
+    return articles;
   }
 }
 

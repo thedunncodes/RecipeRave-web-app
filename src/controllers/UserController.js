@@ -3,7 +3,6 @@ import { ObjectId } from 'mongodb';
 import dbClient from '../../utils/db';
 import indexRange from '../../utils/pagehelper';
 
-
 export default class AppController {
   static signUpRoute(req, res) {
     const message = {
@@ -23,7 +22,6 @@ export default class AppController {
     }
     const user = await dbClient.client.db().collection('users').findOne({ username: req.body.username });
     if (user) {
-      console.log('Breaaaaach!!!......');
       if (user.email === data.email) {
         return res.status(404).json({ error: 'Unauthorized' });
       }
@@ -40,7 +38,6 @@ export default class AppController {
       password: sha1(data.password),
       profile_image: (req.file) ? req.file.filename : 'default.png',
     });
-    console.log(data);
     res.redirect(`/sign-up?name=${data.username}`);
   }
 
@@ -48,23 +45,16 @@ export default class AppController {
     const message = {
       title: 'RecipeRave - sign in',
     };
-    console.log('Login ROute running....');
     if (req.isAuthenticated()) {
       res.redirect('/');
     }
-    console.log(`login Page: ${req.session.returnTo}`);
-    console.log(`Login Page Session ID -> ${req.session.id}`);
     res.render('pages/login', { message, layout: 'layouts/auth' });
   }
 
   static loginAccess(req, res) {
-    console.log('login access Route running....');
-    console.log(`Access page Session ID -> ${req.session.id}`)
-
     const redirectTo = dbClient.urlStorage.url || '/';
     delete dbClient.urlStorage.url;
-    console.log(dbClient.urlStorage);
-    console.log(`Redirect to: ${redirectTo}`);
+
     return res.redirect(redirectTo);
   }
 
@@ -83,16 +73,15 @@ export default class AppController {
       limit,
       page: ((req.query) ? req.query.page : 1) || 1,
       roll_start: ((req.query) ? req.query.start : 1) || 1,
-      roll_end: ((req.query) ? req.query.end : 3) || maxPage,
+      roll_end: ((req.query) ? req.query.end : maxPage) || maxPage,
       maxPage,
     };
 
     const [start, end] = indexRange(pagination.page, pagination.limit);
 
-    const articles = await dbClient.client.db().collection('articles').find().toArray();
+    const articles = await dbClient.client.db().collection('articles').find({ user_id: new ObjectId(req.user._id) }).toArray();
     articles.reverse();
     let userArticle = {};
-    console.log(`\n\nEnd: ${end}\n\n`);
     if (end >= articles.length) {
       userArticle = articles.slice(start);
     } else {
@@ -110,25 +99,27 @@ export default class AppController {
       username: req.user.username,
       fullname: req.user.fullname,
       profile_image: (req.user) ? req.user.profile_image : null,
+      url: req.originalUrl,
     };
 
+    const savedPost = req.user.saved_post;
     const limit = 6;
-    let maxPage = await dbClient.nbArticles();
+    let maxPage = savedPost.length;
     maxPage = Math.ceil((maxPage / limit));
     const pagination = {
       limit,
       page: ((req.query) ? req.query.page : 1) || 1,
       roll_start: ((req.query) ? req.query.start : 1) || 1,
-      roll_end: ((req.query) ? req.query.end : 3) || maxPage,
+      roll_end: ((req.query) ? req.query.end : maxPage) || maxPage,
       maxPage,
     };
 
     const [start, end] = indexRange(pagination.page, pagination.limit);
 
-    const articles = await dbClient.client.db().collection('articles').find().toArray();
+    const articles = await dbClient.retreiveSaved(savedPost);
+
     articles.reverse();
     let userArticle = {};
-    console.log(`\n\nEnd: ${end}\n\n`);
     if (end >= articles.length) {
       userArticle = articles.slice(start);
     } else {
@@ -137,16 +128,10 @@ export default class AppController {
     if (!req.isAuthenticated()) {
       return res.redirect('/sign-in');
     }
-    res.render('pages/savedarticle', { data, pagination, userArticle });
+    return res.render('pages/savedarticle', { data, pagination, userArticle });
   }
 
   static async imageUpload(req, res) {
-    // if (req.file) {
-    //   res.send(`Image uploaded: ${req.file.path}`);
-    // } else {
-    //   res.status(400).send('No file uploaded');
-    // }
-
     const image = { profile_image: req.file.filename };
     try {
       const response = await dbClient.client.db().collection('users').updateOne(
@@ -154,14 +139,37 @@ export default class AppController {
         { $set: image },
       );
 
+      await dbClient.client.db().collection('articles').updateMany(
+        { user_id: new ObjectId(req.user._id) },
+        { $set: image },
+      );
+
       if (response.matchedCount === 0) {
         return res.status(404).send('User not found');
-      };
-      res.send('User updated successfully');
+      }
     } catch (err) {
       res.status(500).send('Error updating user');
     }
 
-    // res.render('pages/account', { data });
+    return res.redirect('/account');
+  }
+
+  static async infoUpdate(req, res) {
+    const info = req.body;
+
+    try {
+      const response = await dbClient.client.db().collection('users').updateOne(
+        { _id: new ObjectId(req.user._id) },
+        { $set: info },
+      );
+
+      if (response.matchedCount === 0) {
+        return res.status(404).send('User not found');
+      };
+    } catch (err) {
+      res.status(500).send('Error updating user');
+    }
+
+    return res.redirect('/account');
   }
 }

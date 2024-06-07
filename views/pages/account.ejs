@@ -29,24 +29,24 @@
             <div class="label-holder">
                 Update your information
             </div>
-            <form action="#" method="post">
+            <form action="/account/info-update" method="post">
                 <!-- User Name Field -->
                 <div class="account-form-group">
-                    <!-- <label for="username">Username</label> -->
-                    <input type="text" id="username" name="username" required aria-required="true" maxlength="20" placeholder="New username">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" aria-required="true" maxlength="20" placeholder="New username" value="<%= currentUser.username %>">
                 </div>
             
                 <!-- Full Name Field -->
                 <div class="account-form-group">
-                    <!-- <label for="fullname">Full name</label> -->
-                    <input type="text" id="fullname" name="fullname" required aria-required="true" maxlength="50" placeholder="New fullname">
+                    <label for="fullname">Full name</label>
+                    <input type="text" id="fullname" name="fullname" aria-required="true" maxlength="50" placeholder="New fullname" value="<%= currentUser.fullname%>">
                 </div>
             
                 <!-- Password Field -->
-                <div class="account-form-group">
-                    <!-- <label for="password">Password</label> -->
-                    <input type="password" id="password" name="password" required aria-required="true" minlength="5" placeholder="New password">
-                </div>
+                <!-- <div class="account-form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" aria-required="true" minlength="5" placeholder="New password">
+                </div> -->
             
                 <!-- Submit Button -->
                 <div class="account-form-group">
@@ -106,8 +106,5 @@
                 &raquo;
             </div>
         </div>
-    </div>
-    <div class="users-post-saves">
-        saves
     </div>
 </div>

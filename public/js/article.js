@@ -16,6 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     placeholder: 'Write your Recipe blog here.',
   });
 
+
+
+
+
+
   // Save article button event listener
   document.getElementById('save-article').onclick = async () => {
     // const articleContent = quill.root.innerHTML;
@@ -36,26 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Hide error message if content is valid
         document.getElementById('editor-error').style.display = 'none';
       }
+
+      const category = document.querySelector('input[name=category]');
+
+      if (category.value === '') {
+        document.querySelector('.category-error').style.display = 'block';
+        e.preventDefault();
+      } else {
+        document.querySelector('.category-error').style.display = 'none';
+      }
     };
-    // const delta = quill.getContents();
-
-    // You can send the content to your server here
-    // Example:
-    // const data = { content: 'hallo server' };
-    // try {
-    //   const response = await fetch('/article/data', {
-    //     method: 'POST', // or 'PUT'
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ articleContent }),
-    //   });
-
-    //   const result = await response.text();
-    //   console.log('Success:', result);
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
   };
   const targetElement = document.querySelector('.image-preview-wrapper');
   const removeButton = targetElement.querySelector('.remove-btn');

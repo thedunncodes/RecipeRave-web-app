@@ -26,9 +26,17 @@ router.post('/sign-in/access', passport.authenticate('local', {
 
 router.get('/recipes/:postId', PostController.getPost);
 
+router.get('/recipe-category/:category', PostController.recipeCategory);
+
+router.post('/save-post', AppController.ensureAuthenticated, PostController.savePost);
+
+router.post('/remove-post', AppController.ensureAuthenticated, PostController.removePost);
+
 router.get('/account', AppController.ensureAuthenticated, UserController.account);
 
 router.get('/account/saved', AppController.ensureAuthenticated, UserController.savedArticle);
+
+router.post('/account/info-update', AppController.ensureAuthenticated, UserController.infoUpdate);
 
 router.post('/account/profile-update', upload.single('image'), UserController.imageUpload);
 

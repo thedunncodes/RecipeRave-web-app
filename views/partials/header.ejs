@@ -26,7 +26,22 @@
         <div class="menu-toggle-wrapper">
             <div class="menu-container">
                 <div class="menu-tab">
-                    <a role="menu-item" href="#recipe">Recipes</a>
+                    <div class="menu-item-dropdown">
+                        <a role="menu-item" href="/" class="menu-item-dropdown-btn">Recipes</a>
+                        <div class="menu-item-dropdown-content">
+                            <div class="menu-item-dropdown-content-wrapper">
+                                <a href="/recipe-category/Break Fast">Break Fast</a>
+                                <a href="/recipe-category/Launch">Launch</a>
+                                <a href="/recipe-category/Dinner">Dinner</a>
+                                <a href="/recipe-category/Dessert">Dessert</a>
+                                <a href="/recipe-category/Baking">Baking</a>
+                                <a href="/recipe-category/Drinks">Drinks</a>
+                                <% if (currentUser) { %>
+                                    <a href="/article" class="menu-dropdown-postarticle">Create Recipe</a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
                     <a role="menu-item" href="#about">About</a>
                     <a role="menu-item" href="#contact">Contact</a>
                 </div>

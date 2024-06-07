@@ -5,11 +5,16 @@ const pageIndex = document.querySelectorAll('#page-index');
 
 const urlParams = new URLSearchParams(window.location.search);
 
+let account = window.location.pathname;
 const page = urlParams.get('page') || 1;
 const start = urlParams.get('start') || 1;
 const maxPage = pageIndex[0].href.slice(-1);
 const end = urlParams.get('end') || maxPage;
 
+if (!(account.slice(-1) === '/')) {
+  account = `${account}/`;
+}
+console.log(account);
 
 // Get all parameter entries as an iterator
 for (const [key, value] of urlParams.entries()) {
@@ -24,7 +29,7 @@ pageIndex.forEach((Page) => {
 
     Page.href = '';
     if (!(currentPage > maxPage + 1)) {
-      Page.href = `/account/?page=${(Number(currentPage) >= maxPage) ? maxPage : Number(currentPage)}&start=${(Number(currentPage) >= maxPage) ? maxPage : Number(currentPage)}&end=${((Number(currentPage) + 2) >= maxPage) ? maxPage : (Number(currentPage) + 2)}&maxPage=${maxPage}`;
+      Page.href = `${account}?page=${(Number(currentPage) >= maxPage) ? maxPage : Number(currentPage)}&start=${(Number(currentPage) >= maxPage) ? maxPage : Number(currentPage)}&end=${((Number(currentPage) + 2) >= maxPage) ? maxPage : (Number(currentPage) + 2)}&maxPage=${maxPage}`;
     }
 
     window.location.href = Page.href;
@@ -42,7 +47,7 @@ nextPageBtn.addEventListener('click', () => {
     if (!(currentPage >= maxPage)) {
       if (Number(pageIndex[index].textContent) === Number(pageTracker.page)) {
         console.log(Number(pageTracker.page) + 1);
-        pageIndex[index].href = `/account?page=${currentPage + 1}&start=${Number(start) + 1}&end=${((newPage + 2) >= maxPage) ? maxPage : (newPage + 2)}&maxPage=${maxPage}`;
+        pageIndex[index].href = `${account}?page=${currentPage + 1}&start=${Number(start) + 1}&end=${((newPage + 2) >= maxPage) ? maxPage : (newPage + 2)}&maxPage=${maxPage}`;
         console.log(pageIndex[index].href);
 
         window.location.href = pageIndex[index].href;
@@ -58,14 +63,14 @@ prevPageBtn.addEventListener('click', (event) => {
     if ((Number(page) - 1) !== 0) {
       if (Number(pageIndex[index].textContent) === Number(pageTracker.page)) {
         console.log(Number(pageTracker.page) - 1);
-        pageIndex[index].href = `/account?page=${Number(page) - 1}&start=${Number(start) - 1}&end=${(((Number(page) - 1) + 2) >= maxPage) ? maxPage : ((Number(page) - 1) + 2)}&maxPage=${maxPage}`;
+        pageIndex[index].href = `${account}?page=${Number(page) - 1}&start=${Number(start) - 1}&end=${(((Number(page) - 1) + 2) >= maxPage) ? maxPage : ((Number(page) - 1) + 2)}&maxPage=${maxPage}`;
         console.log(pageIndex[index].href);
         // pageIndex[index].click();
 
         window.location.href = pageIndex[index].href;
       }
     } else if (Number(page) === 0) {
-      pageIndex[index].href = `/account?page=${Number(page)}&start=${Number(start) - 1}&end=${(((Number(page) - 1) + 2) >= maxPage) ? maxPage : ((Number(page) - 1) + 2)}&maxPage=${maxPage}`;
+      pageIndex[index].href = `${account}?page=${Number(page)}&start=${Number(start) - 1}&end=${(((Number(page) - 1) + 2) >= maxPage) ? maxPage : ((Number(page) - 1) + 2)}&maxPage=${maxPage}`;
       // pageIndex[index].click();
       window.location.href = pageIndex[index].href;
     }

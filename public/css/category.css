@@ -1,0 +1,34 @@
+.category-recipe-header {
+    background-color: white;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.category-recipe-header h1 {
+    font-weight: 400;
+    color: rgb(39, 39, 39);
+    /* word-spacing: 10px; */
+    font-size: 2.6rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.category-recipe-header h1 a {
+    text-decoration: none;
+    color: rgb(39, 39, 39);
+}
+
+.category-recipe-header-slash {
+    color: rgb(1, 172, 4);
+    font-size: 3rem;
+    margin: 0 10px;
+}
+
+.posts-container {
+    
+}
+
+.posts-recipe-content {
+    
+}

@@ -1,35 +1,53 @@
 import dbClient from '../../utils/db';
+import indexRange from '../../utils/pagehelper';
 
 export default class AppController {
   static async homeRoute(req, res) {
     const data = {
       title: 'RecipeRave',
       profile_image: (req.user) ? req.user.profile_image : null,
+      breakFast: await dbClient.nbCategory('Break Fast'),
+      launch: await dbClient.nbCategory('Launch'),
+      dinner: await dbClient.nbCategory('Dinner'),
+      dessert: await dbClient.nbCategory('Dessert'),
+      baking: await dbClient.nbCategory('Baking'),
+      drinks: await dbClient.nbCategory('Drinks'),
     };
-    // console.log(dbClient.isAlive());
-    const article = await dbClient.client.db().collection('articles').find().toArray();
-    article.reverse();
-    console.log(`\n\n\nIndex page Session ID -> ${req.session}\n\n\n`);
-    console.log(req.session);
-    res.render('pages/index', { data, article });
+
+    const limit = 6;
+    let maxPage = await dbClient.nbArticles();
+    maxPage = Math.ceil((maxPage / limit));
+    const pagination = {
+      limit,
+      page: ((req.query) ? req.query.page : 1) || 1,
+      roll_start: ((req.query) ? req.query.start : 1) || 1,
+      roll_end: ((req.query) ? req.query.end : maxPage) || maxPage,
+      maxPage,
+    };
+
+    const [start, end] = indexRange(pagination.page, pagination.limit);
+
+    const articles = await dbClient.client.db().collection('articles').find().toArray();
+    articles.reverse();
+    let userArticle = {};
+    if (end >= articles.length) {
+      userArticle = articles.slice(start);
+    } else {
+      userArticle = articles.slice(start, end);
+    }
+
+    res.render('pages/index', { data, pagination, userArticle });
   }
 
   static ensureAuthenticated(req, res, next) {
-    console.log('ENsure authenticated running....\n');
     if (req.isAuthenticated()) {
       return next();
     }
     dbClient.urlStorage.url = req.originalUrl;
-    console.log(dbClient.urlStorage);
-    console.log(`Original url -> ${req.session.returnTo}`);
     return res.redirect('/sign-in');
   }
 
   static logout(req, res) {
-    // if (!req.isAuthenticated()) {
-    //   return res.redirect('/');
-    // }
-    console.log('\n\nLogout toute running.....\n\n');
     req.session.destroy();
     return res.redirect('/');
   }

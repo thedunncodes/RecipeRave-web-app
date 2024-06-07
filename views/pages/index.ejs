@@ -1,7 +1,12 @@
 <div class="body-container">
    <div class="content-container">
       <div class="intro-container">
-
+         <div class="intro-container-wrapper">
+            <h1>Recipe Rave</h1>
+            <div class="intro-container-content">
+               Discover, share, and celebrate your culinary creations with food lovers everywhere. Dive into delicious recipes and inspire others with your kitchen masterpieces. Let's get cooking!
+            </div>
+         </div>
       </div>
       <div class="category-container">
          <div class="grid-container">
@@ -11,11 +16,11 @@
                </div>
                <div class="category-box-content">
                   <span class="category-box-item">
-                     <a href="">
+                     <a href="/recipe-category/Break Fast">
                         Break Fast
                      </a>
-                     <a href="">
-                        70 recipes
+                     <a href="/recipe-category/Break Fast">
+                        <%= data.breakFast %> Recipes
                      </a>
                   </span>
                </div>
@@ -26,11 +31,11 @@
                </div>
                <div class="category-box-content">
                   <span class="category-box-item">
-                     <a href="">
+                     <a href="/recipe-category/Launch">
                         Launch
                      </a>
-                     <a href="">
-                        70 recipes
+                     <a href="/recipe-category/Launch">
+                        <%= data.launch %> Recipes
                      </a>
                   </span>
                </div>
@@ -41,11 +46,11 @@
                </div>
                <div class="category-box-content">
                   <span class="category-box-item">
-                     <a href="">
+                     <a href="/recipe-category/Dinner">
                         Dinner
                      </a>
-                     <a href="">
-                        70 recipes
+                     <a href="/recipe-category/Dinner">
+                        <%= data.dinner %> Recipes
                      </a>
                   </span>
                </div>
@@ -56,11 +61,11 @@
                </div>
                <div class="category-box-content">
                   <span class="category-box-item">
-                     <a href="">
+                     <a href="/recipe-category/Dessert">
                         Dessert
                      </a>
-                     <a href="">
-                        70 recipes
+                     <a href="/recipe-category/Dessert">
+                        <%= data.dessert %> Recipes
                      </a>
                   </span>
                </div>
@@ -71,11 +76,11 @@
                </div>
                <div class="category-box-content">
                   <span class="category-box-item">
-                     <a href="">
+                     <a href="/recipe-category/Baking">
                         Baking
                      </a>
-                     <a href="">
-                        70 recipes
+                     <a href="/recipe-category/Baking">
+                        <%= data.baking %> Recipes
                      </a>
                   </span>
                </div>
@@ -86,11 +91,11 @@
                </div>
                <div class="category-box-content">
                   <span class="category-box-item">
-                     <a href="">
+                     <a href="/recipe-category/Drinks">
                         Drinks
                      </a>
-                     <a href="">
-                        70 recipes
+                     <a href="/recipe-category/Drinks">
+                        <%= data.drinks %> Recipes
                      </a>
                   </span>
                </div>
@@ -98,27 +103,27 @@
          </div>
       </div>
       <div class="posts-container">
-         <h2>Top posts</h2>
+         <h2>Explore Recipes</h2>
          <span class="line-break"></span>
          <div class="posts-grid-container">
-            <% for( let index = 0; index < article.length; index++ ) { %>
+            <% for( let index = 0; index < userArticle.length; index++ ) { %>
                <div class="posts-box-content-wrapper">
                   <div class="posts-box-content">
                      <div class="posts-box-header-content">
-                        <a href="/recipes/<%= article[index]._id%>">
-                           <img src="/images/uploads/covers/<%-  article[index].cover_image %>" alt="Post cover image">
+                        <a href="/recipes/<%= userArticle[index]._id%>">
+                           <img src="/images/uploads/covers/<%-  userArticle[index].cover_image %>" alt="Post cover image">
                            <h1 class="post-header-content">
-                              <%-  article[index].title %> 
+                              <%-  userArticle[index].title %> 
                            </h1>
                         </a>
                      </div>
                      <div class="posts-box-profile-content">
                         <a href="">
                            <span class="posts-profile-content">
-                              By: <%-  article[index].fullname %> |
+                              By: <%-  userArticle[index].fullname %> |
                            </span>
                            <span class="posts-profile-content-date">
-                              <%-  article[index].date_created %>
+                              <%-  userArticle[index].date_created %>
                            </span>
                         </a>
                      </div>
@@ -127,5 +132,21 @@
             <% } %>
          </div>
       </div>
+      <div class="pagination-wrapper">
+         <div class="pagination">
+             <div class="page-prev">
+                 &laquo;
+             </div>
+             <% for( let index = pagination.roll_start; index <= pagination.roll_end; index++ ) { %>
+                 <div class="page-index">
+                     <a href="/account/?page=<%= index %>&start=<%= index %>&end=<%= ((Number(index) + 2) >= pagination.maxPage)? pagination.maxPage : (Number(index) + 2) %>&maxPage=<%= pagination.maxPage %>" id="page-index"><%= index %></a>
+                 </div>
+             <% } %>
+             <div class="page-next">
+                 <!-- <a href="/account/?page=1&start=1&end=3&maxPage=<%= pagination.maxPage %>" id="page-next">&raquo;</a> -->
+                 &raquo;
+             </div>
+         </div>
+     </div>
    </div>
 </div>

@@ -5,15 +5,30 @@
                 <img src="/images/uploads/covers/<%-  article.cover_image %>" class="post-header-img" alt="cover_image">
                 <h1><%- article.title %></h1>
                 <div class="post-header-info">
-                    <img src="/images/uploads/profilepics/default.png" alt="">
+                    <img src="/images/uploads/profilepics/<%= article.profile_image %>" alt="">
                     <span>
                         By: <a href=""><%-  article.fullname %></a> | <%-  article.date_created %>
                     </span>
+                    <% if (data.url) { %>
+                        <div id="remove-post" class="post-save-article">
+                            Remove
+                        </div>
+                    <% } else { %>
+                        <div id="save-post" class="post-save-article">
+                            Save Post
+                        </div>
+                    <% } %>
                 </div>
             </div>
             <div class="post-content-container">
-                <!-- ADD PROFILE IMAGE HERE DO THIS BEFORE CONTINUE
-                FIX THE PROFILE UPLOAD
+                <!-- whebever i click save post i i want to add the current post objectid to a 'saved_post'
+                    in the 'users' document so i can retreive all documents by a for loop using the lengthof the
+                    'saved_post' list saved to another variable
+
+                    every article must now have 'profile_image'
+
+                    when user updates email update all posts with that users id, to show user-image while
+                    another user is accessing a post
                 -->
 
                 <%- article.content %>

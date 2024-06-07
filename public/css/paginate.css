@@ -1,8 +1,17 @@
 .pagination-wrapper {
-  display: block;
-  width: 15%;
+  display: grid;
   margin: auto;
   height: 3rem;
+  background-color: white;
+  margin-top: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.pagination {
+  display: flex;
+  width: fit-content;
+  margin: auto;
 }
 
 .pagination a, .pagination .page-next, .pagination .page-prev {
@@ -10,7 +19,7 @@
     float: left;
     padding: 8px 16px;
     text-decoration: none;
-    transition: background-color .3s;
+    transition: background-color .3s; 
   }
   
   .pagination .page-next, .pagination .page-prev {
