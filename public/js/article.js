@@ -16,29 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
     placeholder: 'Write your Recipe blog here.',
   });
 
-
-
-
-
-
-  // Save article button event listener
   document.getElementById('save-article').onclick = async () => {
-    // const articleContent = quill.root.innerHTML;
-    // console.log('Article Content:', articleContent);
 
     const form = document.getElementById('article-form');
     form.onsubmit = (e) => {
-      // Append Quill content before submitting
       const content = document.querySelector('input[name=content]');
       content.value = quill.root.innerHTML.trim();
       console.log(content.value);
 
       if (content.value === '' || content.value === '<p><br></p>') {
-        // Show error message
         document.getElementById('editor-error').style.display = 'block';
-        e.preventDefault(); // Prevent form submission
+        e.preventDefault(); 
       } else {
-        // Hide error message if content is valid
         document.getElementById('editor-error').style.display = 'none';
       }
 
@@ -96,25 +85,19 @@ if (imageInput) {
 }
 
 function wrapElement(wrapperClass, targetSelector) {
-  // Find the target element
   const targetElement = document.querySelector(targetSelector);
   if (targetElement) {
-    // Create a new wrapper div
     const wrapper = document.createElement('div');
     wrapper.className = wrapperClass;
 
-    // Insert the wrapper before the target element
     targetElement.parentNode.insertBefore(wrapper, targetElement);
 
-    // Move the target element into the wrapper
     wrapper.appendChild(targetElement);
   } else {
     console.error('Target element not found:', targetSelector);
   }
 }
 
-// Wait for Quill to initialize and then wrap the toolbar
 window.onload = function () {
-  // Wrap the element with class 'ql-toolbar' in a new div with class 'custom-wrapper'
   wrapElement('quill-toolbar-wrapper', '.ql-toolbar');
 };

@@ -18,11 +18,3 @@ document.getElementById('profile-image-input').addEventListener('change', functi
     imagePreview.style.display = 'none';
   }
 });
-
-// document.getElementById('image-form').addEventListener('submit', (event) => {
-//   const fileInput = document.getElementById('file-input');
-//   if (!fileInput.value) {
-//     event.preventDefault();
-//     alert('Please select an image to upload.');
-//   }
-// });

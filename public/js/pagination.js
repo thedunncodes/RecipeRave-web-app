@@ -58,20 +58,17 @@ nextPageBtn.addEventListener('click', () => {
 
 prevPageBtn.addEventListener('click', (event) => {
   console.log(`index length: ${pageIndex.length}`);
-  // event.preventDefault();
   for (let index = 0; index < pageIndex.length; index++) {
     if ((Number(page) - 1) !== 0) {
       if (Number(pageIndex[index].textContent) === Number(pageTracker.page)) {
         console.log(Number(pageTracker.page) - 1);
         pageIndex[index].href = `${account}?page=${Number(page) - 1}&start=${Number(start) - 1}&end=${(((Number(page) - 1) + 2) >= maxPage) ? maxPage : ((Number(page) - 1) + 2)}&maxPage=${maxPage}`;
         console.log(pageIndex[index].href);
-        // pageIndex[index].click();
 
         window.location.href = pageIndex[index].href;
       }
     } else if (Number(page) === 0) {
       pageIndex[index].href = `${account}?page=${Number(page)}&start=${Number(start) - 1}&end=${(((Number(page) - 1) + 2) >= maxPage) ? maxPage : ((Number(page) - 1) + 2)}&maxPage=${maxPage}`;
-      // pageIndex[index].click();
       window.location.href = pageIndex[index].href;
     }
   }

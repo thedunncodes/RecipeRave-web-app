@@ -3,10 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const category = document.querySelector('input[name=category]');
 
   categoryMenus.forEach((menu) => {
-    //   console.log(menu);
     menu.addEventListener('click', () => {
       category.value = menu.innerHTML.trim();
-      console.log(category.value);
 
       categoryMenus.forEach((subMenu) => {
         if (subMenu.classList.contains('category-content-active')) {
