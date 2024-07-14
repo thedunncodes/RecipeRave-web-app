@@ -8,8 +8,8 @@ This is a robust web app that properly formats user input and displays them in a
 * **Front-end:** HTML/CSS
 * **Database:** MongoDB
 ### Libraries used:
-* Quill.js(text editor for accepting user article input. [Learn more..](https://quilljs.com/))
-* Multer.js(For file/image uploads [Learn more..](https://www.freecodecamp.org/news/simplify-your-file-upload-process-in-express-js/)).
-* Passport.js (For user session and authentication [Learn more..](https://www.passportjs.org/))
-* moment.js (For recording date and time [Learn more..](https://momentjs.com/))
+* Quill.js (text editor for accepting user article input. [learn more...](https://quilljs.com/))
+* Multer.js (For file/image uploads [learn more...](https://www.freecodecamp.org/news/simplify-your-file-upload-process-in-express-js/))
+* Passport.js (For user session and authentication [learn more...](https://www.passportjs.org/))
+* moment.js (For recording date and time [learn more...](https://momentjs.com/))
 
