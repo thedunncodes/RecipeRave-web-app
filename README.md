@@ -50,3 +50,7 @@ This is a robust web app that properly formats user input and displays them in a
         http//:localhost:`PORT`
         ```
         Copy that above and implement the port used to access the application
+## Highlights
+![Recipe Rave home page](public/images/static_images/preview1.png)
+![User Recipe Article Creation Page](public/images/static_images/preview2.png)
+![Recipe Rave home page articles and categories](public/images/static_images/preview3.png)
