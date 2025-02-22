@@ -67,7 +67,7 @@ export default class AppController {
     };
 
     const limit = 6;
-    let maxPage = await dbClient.nbArticles();
+    let maxPage = await dbClient.nbArticles(); // change this to be specific to user
     maxPage = Math.ceil((maxPage / limit));
     const pagination = {
       limit,

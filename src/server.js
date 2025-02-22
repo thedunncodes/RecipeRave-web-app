@@ -5,11 +5,11 @@ import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import routes from './routes';
 import dbClient from '../utils/db';
 
-dotenv.config();
+// dotenv.config();
 const expressLayout = require('express-ejs-layouts');
 
 const app = express();
